@@ -1,4 +1,4 @@
-const teamMembers = ['Alice', 'Bob', 'Charlie', 'David', 'Eve', 'Frank', 'Grace'];
+const teamMembers = ['Darryl', 'Desmond', 'Melven', 'Raymond', 'Jwong', 'Firdaus', 'Wei Ren'];
 const offDaysLimit = { 'Monday': 3, 'Tuesday': 3, 'Wednesday': 3, 'Thursday': 3, 'Friday': 3, 'Saturday': 4, 'Sunday': 4 };
 const schedule = {
     'Monday': [],
