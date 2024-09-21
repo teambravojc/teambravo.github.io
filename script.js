@@ -1,4 +1,4 @@
-const teamMembers = ['Darryl', 'Desmond', 'Melven', 'Firdaus', 'JWong', 'Raymond', 'Wei Ren'];
+const teamMembers = ['Alice', 'Bob', 'Charlie', 'David', 'Eve', 'Frank', 'Grace'];
 const offDaysLimit = { 'Monday': 3, 'Tuesday': 3, 'Wednesday': 3, 'Thursday': 3, 'Friday': 3, 'Saturday': 4, 'Sunday': 4 };
 const schedule = {
     'Monday': [],
@@ -39,6 +39,37 @@ function loadSchedule() {
         console.error(error);
     });
 }
+
+// Function to reset the schedule
+function resetSchedule() {
+    for (const day in schedule) {
+        schedule[day] = [];
+    }
+
+    for (const member of teamMembers) {
+        memberOffDays[member] = 0;
+    }
+
+    // Clear the Firebase database
+    set(ref(database, 'offDaysSchedule'), schedule);
+    initializeTable(); // Refresh the table
+}
+
+// Check if it’s Sunday after 12 PM Singapore time
+function checkAndReset() {
+    const now = new Date();
+    const options = { timeZone: 'Asia/Singapore', hour: 'numeric', weekday: 'long' };
+    const singaporeTime = now.toLocaleString('en-US', options);
+    const [day, hours] = singaporeTime.split(", "); // Extract day and hour
+    const hour = parseInt(hours); // Convert hour to integer
+
+    if (day === "Sunday" && hour >= 12) { // If it's Sunday and after 12 PM
+        resetSchedule();
+    }
+}
+
+// Run the check every hour
+setInterval(checkAndReset, 3600000); // Check every hour
 
 // Handle form submission for selecting off days
 offDaysForm.addEventListener('submit', function(event) {
@@ -92,14 +123,12 @@ function getDayColumnIndex(day) {
 
 // Initialize the table and dropdown
 function initializeTable() {
+    scheduleTableBody.innerHTML = ""; // Clear existing rows
     teamMembers.forEach(member => {
         const row = document.createElement('tr');
         row.innerHTML = `<td>${member}</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>`;
         row.setAttribute('data-name', member);
         scheduleTableBody.appendChild(row);
-
-        // Initialize off days count for each member
-        memberOffDays[member] = 0;
     });
 }
 
