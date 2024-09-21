@@ -4,92 +4,67 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Team Off Days Schedule</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
-        body { font-family: Arial, sans-serif; margin: 20px; }
-        table { width: 100%; margin-top: 20px; border-collapse: collapse; }
-        th, td { padding: 10px; border: 1px solid #ccc; text-align: center; }
+        body { margin: 20px; }
+        table { margin-top: 20px; }
         th { background-color: #f4f4f4; }
-        #scheduleTable { margin-bottom: 20px; }
-
-        /* Responsive Design */
-        @media (max-width: 600px) {
-            table, th, td {
-                display: block;
-                width: 100%;
-                box-sizing: border-box;
-            }
-            th, td {
-                text-align: left;
-                padding: 8px;
-            }
-            tr {
-                margin-bottom: 15px;
-                border: 1px solid #ccc;
-            }
-            th {
-                display: none; /* Hide headers for small screens */
-            }
-            td {
-                border: none;
-                position: relative;
-                padding-left: 50%;
-            }
-            td::before {
-                content: attr(data-label);
-                position: absolute;
-                left: 10px;
-                width: calc(50% - 20px);
-                font-weight: bold;
-                text-align: left;
-            }
-        }
     </style>
 </head>
 <body>
 
-    <h1>Team Off Days Schedule</h1>
+    <div class="container">
+        <h1 class="text-center">Team Off Days Schedule</h1>
 
-    <table id="scheduleTable">
-        <thead>
-            <tr>
-                <th>Team Member</th>
-                <th>Monday</th>
-                <th>Tuesday</th>
-                <th>Wednesday</th>
-                <th>Thursday</th>
-                <th>Friday</th>
-                <th>Saturday</th>
-                <th>Sunday</th>
-            </tr>
-        </thead>
-        <tbody>
-            <!-- Rows will be dynamically generated for each team member -->
-        </tbody>
-    </table>
+        <table class="table table-bordered" id="scheduleTable">
+            <thead>
+                <tr>
+                    <th>Team Member</th>
+                    <th>Monday</th>
+                    <th>Tuesday</th>
+                    <th>Wednesday</th>
+                    <th>Thursday</th>
+                    <th>Friday</th>
+                    <th>Saturday</th>
+                    <th>Sunday</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Rows will be dynamically generated for each team member -->
+            </tbody>
+        </table>
 
-    <h2>Select Off Days</h2>
-    <form id="offDaysForm">
-        <label for="name">Team Member Name:</label>
-        <select id="name" required>
-            <option value="">Select a member</option>
-        </select><br><br>
+        <h2>Select Off Days</h2>
+        <form id="offDaysForm">
+            <div class="form-group">
+                <label for="name">Team Member Name:</label>
+                <select id="name" class="form-control" required>
+                    <option value="">Select a member</option>
+                </select>
+            </div>
 
-        <label for="offDays">Select Off Day:</label>
-        <select id="offDays" required>
-            <option value="">Select a day</option>
-            <option value="Monday">Monday</option>
-            <option value="Tuesday">Tuesday</option>
-            <option value="Wednesday">Wednesday</option>
-            <option value="Thursday">Thursday</option>
-            <option value="Friday">Friday</option>
-            <option value="Saturday">Saturday</option>
-            <option value="Sunday">Sunday</option>
-        </select><br><br>
+            <div class="form-group">
+                <label for="offDays">Select Off Day:</label>
+                <select id="offDays" class="form-control" required>
+                    <option value="">Select a day</option>
+                    <option value="Monday">Monday</option>
+                    <option value="Tuesday">Tuesday</option>
+                    <option value="Wednesday">Wednesday</option>
+                    <option value="Thursday">Thursday</option>
+                    <option value="Friday">Friday</option>
+                    <option value="Saturday">Saturday</option>
+                    <option value="Sunday">Sunday</option>
+                </select>
+            </div>
 
-        <button type="submit">Submit</button>
-    </form>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
 
     <script src="script.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 </body>
 </html>
