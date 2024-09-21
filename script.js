@@ -1,4 +1,4 @@
-const teamMembers = ['Darryl', 'Desmond', 'Firdaus', 'Raymond', 'Melven', 'J Wong', 'Wei Ren'];
+const teamMembers = ['Darryl', 'Desmond', 'Melven', 'Firdaus', 'JWong', 'Raymond', 'Wei Ren'];
 const offDaysLimit = { 'Monday': 3, 'Tuesday': 3, 'Wednesday': 3, 'Thursday': 3, 'Friday': 3, 'Saturday': 4, 'Sunday': 4 };
 const schedule = {
     'Monday': [],
@@ -19,19 +19,25 @@ const scheduleTableBody = document.getElementById('scheduleTable').querySelector
 // Track how many days each member has taken off
 const memberOffDays = {};
 
-// Load the schedule from localStorage
+// Load the schedule from Firebase
 function loadSchedule() {
-    const savedSchedule = JSON.parse(localStorage.getItem('offDaysSchedule'));
-
-    if (savedSchedule) {
-        for (const day in savedSchedule) {
-            savedSchedule[day].forEach(member => {
-                schedule[day].push(member);
-                memberOffDays[member] = (memberOffDays[member] || 0) + 1;
-                removeTeamMemberFromTable(member, day);
-            });
+    const dbRef = ref(database, 'offDaysSchedule/');
+    get(child(dbRef)).then((snapshot) => {
+        if (snapshot.exists()) {
+            const savedSchedule = snapshot.val();
+            for (const day in savedSchedule) {
+                savedSchedule[day].forEach(member => {
+                    schedule[day].push(member);
+                    memberOffDays[member] = (memberOffDays[member] || 0) + 1;
+                    removeTeamMemberFromTable(member, day);
+                });
+            }
+        } else {
+            console.log("No data available");
         }
-    }
+    }).catch((error) => {
+        console.error(error);
+    });
 }
 
 // Handle form submission for selecting off days
@@ -60,8 +66,8 @@ offDaysForm.addEventListener('submit', function(event) {
     removeTeamMemberFromTable(member, day);
     offDaysForm.reset();
 
-    // Save the updated schedule to localStorage
-    localStorage.setItem('offDaysSchedule', JSON.stringify(schedule));
+    // Save the updated schedule to Firebase
+    set(ref(database, 'offDaysSchedule'), schedule);
 });
 
 // Remove team member from the schedule table for the selected day
