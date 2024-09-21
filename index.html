@@ -3,12 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Team Bravo Weekly Schedule</title>
+    <title>Team Off Days Schedule</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
         body { margin: 20px; }
-        table { margin-top: 20px; }
-        th { background-color: #f4f4f4; }
     </style>
 </head>
 <body>
@@ -61,10 +59,29 @@
         </form>
     </div>
 
-    <script src="script.js"></script>
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- Firebase SDK -->
+    <script type="module">
+      // Import the functions you need from the SDKs you need
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-app.js";
+      import { getDatabase, ref, set, get, child } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-database.js";
+      
+      // Your web app's Firebase configuration
+      const firebaseConfig = {
+        apiKey: "AIzaSyCAWOnkKtpmtgBjC7MqEdwYhl1WjqC_n2g",
+        authDomain: "team-bravo-schedule.firebaseapp.com",
+        projectId: "team-bravo-schedule",
+        storageBucket: "team-bravo-schedule.appspot.com",
+        messagingSenderId: "56802188265",
+        appId: "1:56802188265:web:55830301f3ca5fffc8c978",
+        measurementId: "G-5D7DME2BT3"
+      };
 
+      // Initialize Firebase
+      const app = initializeApp(firebaseConfig);
+      const database = getDatabase(app);
+    </script>
+
+    <!-- Your Custom JavaScript -->
+    <script src="script.js" type="module"></script>
 </body>
 </html>
